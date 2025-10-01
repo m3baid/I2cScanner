@@ -2,7 +2,7 @@
 
 A simple and effective Arduino sketch to scan the I2C bus for connected devices. It displays the addresses of any found devices on a 128x64 I2C OLED display (compatible with both SSD1306 and SSH1106 drivers).
 
-![demo](https://i.imgur.com/u5gqJzL.gif)  ## Features
+## Features
 
 - Scans all possible I2C addresses (1 to 127).
 - Displays the address of any found device in hexadecimal format on an OLED screen.
