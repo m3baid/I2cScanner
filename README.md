@@ -7,20 +7,17 @@ A simple and effective Arduino sketch to scan the I2C bus for connected devices.
 - Scans all possible I2C addresses (1 to 127).
 - Displays the address of any found device in hexadecimal format on an OLED screen.
 - Provides clear status messages like "Scanning..." and "No I2C devices found".
-- Easily configurable for different OLED display types (SSD1306/SSH1106, 128x32/128x64) by uncommenting a single line.
-- Includes an optional debug output to the Serial Monitor.
 
 ## Hardware Requirements
 
-- An Arduino-compatible microcontroller (e.g., Arduino Uno/Nano, ESP32, ESP8266).
-- A 128x64 I2C OLED Display based on the SSD1306 or SSH1106 driver.
+- An Arduino-compatible microcontroller (e.g., Arduino Uno/Nano, ESP32, ESP8266, Raspberry Pi Pico).
+- A 128x64 I2C OLED Display based on the SSH1106 driver.
 - Jumper wires to connect the components.
 - Any I2C device to test with (e.g., a BME280 sensor, a DS3231 RTC, etc.).
 
 ## Software Requirements
 
-1.  **Arduino IDE**: Download from the [official Arduino website](https://www.arduino.cc/en/software).
-2.  **GyverOLED Library**: This powerful library is required to control the display. You can install it from the Arduino IDE's Library Manager:
+1.  **GyverOLED Library**: This powerful library is required to control the display. You can install it from the Arduino IDE's Library Manager:
     - Go to `Tools` > `Manage Libraries...`
     - Search for `GyverOLED`.
     - Click `Install`.
@@ -29,12 +26,14 @@ A simple and effective Arduino sketch to scan the I2C bus for connected devices.
 
 Connect your OLED display to your microcontroller using the I2C pins. The specific pins can vary depending on your board.
 
-| OLED Pin | Arduino Uno / Nano | ESP32           |
-| :------- | :----------------- | :-------------- |
-| `VCC`    | `5V`               | `3.3V` or `5V`  |
-| `GND`    | `GND`              | `GND`           |
-| `SCL`    | `A5`               | `GPIO 22`       |
-| `SDA`    | `A4`               | `GPIO 21`       |
+| OLED Pin | Arduino Uno / Nano | ESP32           | Pi pico           |
+| :------- | :----------------- | :-------------- | :--------------   |
+| `VCC`    | `5V`               | `3.3V` or `5V`  | `VSYS or 3V3 OUT` |
+| `GND`    | `GND`              | `GND`           | `GND`             |
+| `SCL`    | `A5`               | `GPIO 22`       | `GP5`             |
+| `SDA`    | `A4`               | `GPIO 21`       | `GP4`             |
+
+Pull up the SDA and SCL to 3V3 using a 10k resistor to ensure reliable readings.
 
 **Note:** Always check the pinout diagram for your specific board.
 
@@ -45,9 +44,6 @@ Connect your OLED display to your microcontroller using the I2C pins. The specif
 3.  **Open the Sketch**: Open the `I2C_OLED_Scanner.ino` file in the Arduino IDE.
 4.  **Configure Display**: At the top of the sketch, uncomment the line that corresponds to your specific OLED display. The default is set for a 128x64 SSH1106 display.
     ```cpp
-    // For a 128x64 SSD1306 display, use this line:
-    // GyverOLED<SSD1306_128x64, OLED_BUFFER> oled;
-
     // For a 128x64 SSH1106 display, use this line:
     GyverOLED<SSH1106_128x64> oled;
     ```
